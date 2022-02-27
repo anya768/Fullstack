@@ -35,7 +35,9 @@ blogRouter.delete('/:id', userExtractor, async (request, response) => {
 })
 
 blogRouter.put('/:id', async (request, response) => {
-  response.json(await Blog.findByIdAndUpdate(request.params.id, request.body, { new: true }))
+  response.json(await Blog.findByIdAndUpdate(request.params.id, request.body, { new: true })
+    .populate('user', { username: 1, name: 1 }))
+
 })
 
 module.exports = blogRouter
